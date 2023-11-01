@@ -1,15 +1,15 @@
 let todos = [
     {
-        id: 1, name: 'Walk Dog', completed: false, category: 0,
+        id: 1, name: 'Walk Dog', completed: false, category: 'Exercise',
     },
     {
-        id: 2, name: 'Do Homework', completed: false, category: 2,
+        id: 2, name: 'Do Homework', completed: false, category: 'School',
     },
     {
-        id: 3, name: 'Wash dishes', completed: true, category: 1,
+        id: 3, name: 'Wash dishes', completed: true, category: 'Home',
     },
     {
-        id: 4, name: 'Clean room', completed: false, category: 1,
+        id: 4, name: 'Clean room', completed: false, category: 'Home',
     },
 ]
 
@@ -47,7 +47,7 @@ const addCategoryButton = document.getElementById('addCategory')
 
 
 todos.forEach(todo => {
-  addTodoToList(todo.name, todo.checked);
+  addTodoToList(todo.name, todo.checked, todo.category);
 });
 
 function updateTodoStatus() {
@@ -73,7 +73,7 @@ function updateTodoStatus() {
     updateTodoStatus();
   });
 
-function addTodoToList(text, checked) {
+function addTodoToList(text, checked, category) {
   const todoItem = document.createElement('li');
 
   const checkbox = document.createElement('input');
@@ -105,10 +105,15 @@ function addTodoToList(text, checked) {
   const todoText = document.createElement('span');
   todoText.textContent = text;
 
+  const todoCategory = document.createElement('span');
+  todoCategory.textContent = `Category: ${category}`
+
+
   todoItem.appendChild(checkbox);
   todoItem.appendChild(todoText);
   todoItem.appendChild(editButton);
   todoItem.appendChild(deleteButton);
+  todoItem.appendChild(todoCategory)
   todoList.appendChild(todoItem);
 
   if (checked) {
