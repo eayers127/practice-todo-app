@@ -26,6 +26,7 @@ let categories = [
         id: 2,
         categoryName: 'school'
     },
+    // 'Work', 'Home', 'Exercise', 'School'
 ]
 
 
@@ -36,6 +37,10 @@ const clearTodosButton = document.getElementById('clearTodos');
 const status = document.getElementById('status');
 const todosLeft = document.getElementById('todosLeft');
 const todosCompleted = document.getElementById('todosCompleted');
+const clearCategoriesButton = document.getElementById('clearCategories');
+const categoryList = document.getElementById('categoryList');
+const categoryNameInput = document.getElementById('categoryName');
+const categoryInput = document.getElementById('categoryInput');
 
 
 todos.forEach(todo => {
@@ -127,3 +132,11 @@ todoInput.addEventListener('keydown', function (event) {
     addTodo();
   }
 });
+
+categories.forEach(category => {
+    const option = document.getElementById('categoryOption');
+    option.value = category;
+    option.textContent = category.categoryName;
+    categoryInput.appendChild(option);
+  });
+
