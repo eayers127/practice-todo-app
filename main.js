@@ -147,11 +147,13 @@ todoInput.addEventListener('keydown', function (event) {
   function addCategory(categoryName) {
     if (!categories.includes(categoryName)) {
       categories.push(categoryName);
-      const option = document.createElement('option');
-      option.value = categoryName;
-      option.textContent = categoryName;
-      categoryInput.appendChild(option);
-      categoryNameInput.value = '';
+    //   const option = document.createElement('option');
+    //   option.value = categoryName;
+    //   option.textContent = categoryName;
+    //   categoryInput.appendChild(option);
+         categoryNameInput.value = '';
+    } else {
+        alert('That category already exists');
     }
   }
 
@@ -159,10 +161,10 @@ todoInput.addEventListener('keydown', function (event) {
     const categoryIndex = categories.indexOf(categoryName);
     if (categoryIndex !== -1) {
       categories.splice(categoryIndex, 1);
-      const categoryOption = categoryInput.querySelector(`option[value="${categoryName}"]`);
-      if (categoryOption) {
-        categoryOption.remove();
-      }
+    //   const categoryOption = categoryInput.querySelector(`option[value="${categoryName}"]`);
+    //   if (categoryOption) {
+    //     categoryOption.remove();
+    //   }
       updateCategoriesList();
     }
   }
@@ -214,3 +216,8 @@ todoInput.addEventListener('keydown', function (event) {
     addCategory(categoryName);
   });
 
+  clearCategoriesButton.addEventListener('click', function () {
+    categories.length = 0;
+    categoryInput.innerHTML = '<option value="">Select a Category</option>';
+    updateCategoriesList();
+  });
