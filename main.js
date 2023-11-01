@@ -14,19 +14,19 @@ let todos = [
 ]
 
 let categories = [
-    {
-        id: 0,
-        categoryName: 'exercise'
-    },
-    {
-        id: 1,
-        categoryName: 'home'
-    },
-    {
-        id: 2,
-        categoryName: 'school'
-    },
-    // 'Work', 'Home', 'Exercise', 'School'
+    // {
+    //     id: 0,
+    //     categoryName: 'exercise'
+    // },
+    // {
+    //     id: 1,
+    //     categoryName: 'home'
+    // },
+    // {
+    //     id: 2,
+    //     categoryName: 'school'
+    // },
+    'Work', 'Home', 'Exercise', 'School'
 ]
 
 
@@ -41,6 +41,9 @@ const clearCategoriesButton = document.getElementById('clearCategories');
 const categoryList = document.getElementById('categoryList');
 const categoryNameInput = document.getElementById('categoryName');
 const categoryInput = document.getElementById('categoryInput');
+// const option = document.getElementById('categoryOption');
+const addCategoryButton = document.getElementById('addCategory')
+
 
 
 todos.forEach(todo => {
@@ -133,10 +136,81 @@ todoInput.addEventListener('keydown', function (event) {
   }
 });
 
-categories.forEach(category => {
-    const option = document.getElementById('categoryOption');
-    option.value = category;
-    option.textContent = category.categoryName;
-    categoryInput.appendChild(option);
+// categories.forEach(category => {
+//     const option = document.createElement('option');
+//     option.value = category;
+//     option.textContent = category;
+//     categoryInput.appendChild(option);
+//   });
+
+
+  function addCategory(categoryName) {
+    if (!categories.includes(categoryName)) {
+      categories.push(categoryName);
+      const option = document.createElement('option');
+      option.value = categoryName;
+      option.textContent = categoryName;
+      categoryInput.appendChild(option);
+      categoryNameInput.value = '';
+    }
+  }
+
+  function deleteCategory(categoryName) {
+    const categoryIndex = categories.indexOf(categoryName);
+    if (categoryIndex !== -1) {
+      categories.splice(categoryIndex, 1);
+      const categoryOption = categoryInput.querySelector(`option[value="${categoryName}"]`);
+      if (categoryOption) {
+        categoryOption.remove();
+      }
+      updateCategoriesList();
+    }
+  }
+
+  
+  function editCategory(oldCategoryName, newCategoryName) {
+    const categoryIndex = categories.indexOf(oldCategoryName);
+    if (categoryIndex !== -1) {
+      categories[categoryIndex] = newCategoryName;
+      updateCategoriesList();
+    }
+  }
+
+  
+  function updateCategoriesList() {
+    categoryList.innerHTML = '';
+    categories.forEach(category => {
+      const categoryItem = document.createElement('li');
+      categoryItem.textContent = category.toUpperCase();
+      const editCategoryButton = document.createElement('button');
+      editCategoryButton.textContent = 'Edit';
+      editCategoryButton.className = 'edit';
+      editCategoryButton.addEventListener('click', () => {
+        const newCategoryName = prompt('Edit the category name:', category);
+        if (newCategoryName !== null) {
+          editCategory(category, newCategoryName);
+        }
+      });
+      const deleteCategoryButton = document.createElement('button');
+      deleteCategoryButton.textContent = 'Delete';
+      deleteCategoryButton.className = 'delete';
+      deleteCategoryButton.addEventListener('click', () => {
+        deleteCategory(category);
+      });
+      categoryItem.appendChild(editCategoryButton);
+      categoryItem.appendChild(deleteCategoryButton);
+      categoryList.appendChild(categoryItem);
+    });
+  }
+
+  updateCategoriesList();
+
+  addCategoryButton.addEventListener('click', function () {
+    const categoryName = categoryNameInput.value.trim();
+    if (categoryName === '') {
+      alert('Please enter a category name.');
+      return;
+    }
+    addCategory(categoryName);
   });
 
