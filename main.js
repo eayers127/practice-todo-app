@@ -152,6 +152,7 @@ todoInput.addEventListener('keydown', function (event) {
     //   option.textContent = categoryName;
     //   categoryInput.appendChild(option);
          categoryNameInput.value = '';
+         updateCategoriesList();
     } else {
         alert('That category already exists');
     }
