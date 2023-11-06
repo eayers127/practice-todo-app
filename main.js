@@ -224,6 +224,6 @@ todoInput.addEventListener('keydown', function (event) {
 
   clearCategoriesButton.addEventListener('click', function () {
     categories.length = 0;
-    categoryInput.innerHTML = '<option value="">Select a Category</option>';
+    // categoryInput.innerHTML = '<option value="">Select a Category</option>';
     updateCategoriesList();
   });
