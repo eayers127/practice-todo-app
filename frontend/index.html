@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link
+    rel="stylesheet"
+    href="styles.css"
+  />
+</head>
+<body>
+    <h1>Welcome to your todo app</h1>
+    <div>
+        <h2>Todos</h2>
+        <input id="todoInput" type="text" placeholder="Add a New Todo">
+        <button id="addTodo">Add Todo</button>
+        <select id="categoryId">
+            <option id="categoryOption" value="">Select a Category</option>
+        </select>
+    </div>
+    <div>
+        <ul id="todoList"></ul>
+    </div>
+    <button id="clearTodos" class="clear-button">Clear All Todos</button>
+    <div class="status">
+        <span id="todosLeft">4 todos left</span>
+        <span id="todosCompleted">0 todos completed</span>
+      </div>
+
+    <div class="categories">
+        <h2>Categories</h2>
+        <ul id="categoryList"></ul>
+        <input type="text" id="categoryName" placeholder="Add a new category">
+        <button id="addCategory">Add Category</button>
+        <button id="clearCategories" class="clear-button">Clear All Categories</button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
