@@ -1,16 +1,16 @@
 let todos = [
-    // {
-    //     id: 1, name: 'Walk Dog', completed: false, category: 'Exercise',
-    // },
-    // {
-    //     id: 2, name: 'Do Homework', completed: false, category: 'School',
-    // },
-    // {
-    //     id: 3, name: 'Wash dishes', completed: true, category: 'Home',
-    // },
-    // {
-    //     id: 4, name: 'Clean room', completed: false, category: 'Home',
-    // },
+    {
+        id: 1, name: 'Walk Dog', completed: false, category: 'Exercise',
+    },
+    {
+        id: 2, name: 'Do Homework', completed: false, category: 'School',
+    },
+    {
+        id: 3, name: 'Wash dishes', completed: true, category: 'Home',
+    },
+    {
+        id: 4, name: 'Clean room', completed: false, category: 'Home',
+    },
 ]
 
 let categories = [
@@ -26,30 +26,42 @@ let categories = [
     //     id: 2,
     //     categoryName: 'school'
     // },
-    // 'Work', 'Home', 'Exercise', 'School'
+    'Work', 'Home', 'Exercise', 'School'
 ]
 
-async function getData() {
- let todosPromise = fetch('/api/todos')
-  // .then((res) => res.json())
-  // .then((data) => {renderTodos(data)})
+// async function getData() {
+//  let todosPromise = fetch('/api/todos')
+//   // .then((res) => res.json())
+//   // .then((data) => {renderTodos(data)})
 
-  let categoriesPromise = fetch('/api/categories')
+//   let categoriesPromise = fetch('/api/categories')
 
-  Promise.all([todosPromise, categoriesPromise])
-  .then((respsArr) => {
-    return Promise.all(
-      respsArr.map(res =>  res.json)
-    )
-  })
-  .then(([todos, categories]) => {
-    console.log('todos', todos)
-    console.log('categories', categories)
-  })
+//   Promise.all([todosPromise, categoriesPromise])
+//   .then((respsArr) => {
+//     return Promise.all(
+//       respsArr.map(res =>  res.json)
+//     )
+//   })
+//   .then(([todos, categories]) => {
+//     console.log('todos', todos)
+//     console.log('categories', categories)
+//   })
 
-}
+// }
 
-getData();
+// getData();
+
+// async function getData() {
+//   const todosPromise = fetch('/api/todos').then((res) => res.json());
+
+//   Promise.all([todosPromise])
+//     .then(([todos]) => {
+//       console.log('todos', todos);
+//       // You can call a function to render the todos here if needed.
+//     });
+// }
+
+// getData();
 
 
 const todoInput = document.getElementById('todoInput');
@@ -143,6 +155,28 @@ function addTodoToList(text, checked, category) {
   }
 }
 
+// function addTodo() {
+//   const todoText = todoInput.value.trim();
+//   if (todoText === '') {
+//     alert('Please enter a todo.');
+//     return;
+//   }
+
+//   addTodoToList(todoText, false);
+//   todoInput.value = '';
+//   updateTodoStatus();
+
+//   fetch('/api/todo', {
+//     method: "POST",
+//     body: JSON.stringify({
+//       todo: todoText
+//     }),
+//     headers: {'Content-Type': 'application/json'}
+//   })
+//   .then(res => res.json())
+//   .then(data => {console.log(data)})
+//}
+
 function addTodo() {
   const todoText = todoInput.value.trim();
   if (todoText === '') {
@@ -150,21 +184,29 @@ function addTodo() {
     return;
   }
 
+  // const selectedCategory = categoryInput.value;
+
+  // // Ensure a category is selected before adding the todo.
+  // if (!selectedCategory) {
+  //   alert('Please select a category.');
+  //   return;
+  // }
+
   addTodoToList(todoText, false);
   todoInput.value = '';
   updateTodoStatus();
 
-  fetch('/api/todo', {
-    method: "POST",
-    body: JSON.stringify({
-      todo: todoText
-    }),
-    headers: {'Content-Type': 'application/json'}
-  })
-  .then(res => res.json())
-  .then(data => {console.log(data)})
+  // Send the todo data as JSON in the request body.
+  // fetch('/api/todo', {
+  //   method: 'POST',
+  //   body: JSON.stringify({ name: todoText, category: selectedCategory }),
+  //   headers: { 'Content-Type': 'application/json' },
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log(data);
+  //   });
 }
-
 addTodoButton.addEventListener('click', addTodo);
 
 todoInput.addEventListener('keydown', function (event) {
