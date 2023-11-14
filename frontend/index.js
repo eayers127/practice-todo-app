@@ -184,15 +184,15 @@ function addTodo() {
     return;
   }
 
-  // const selectedCategory = categoryInput.value;
+  const selectedCategory = categoryInput.value;
 
-  // // Ensure a category is selected before adding the todo.
-  // if (!selectedCategory) {
-  //   alert('Please select a category.');
-  //   return;
-  // }
+  // Ensure a category is selected before adding the todo.
+  if (!selectedCategory) {
+    alert('Please select a category.');
+    return;
+  }
 
-  addTodoToList(todoText, false);
+  addTodoToList(todoText, false, selectedCategory);
   todoInput.value = '';
   updateTodoStatus();
 
@@ -215,21 +215,26 @@ todoInput.addEventListener('keydown', function (event) {
   }
 });
 
-// categories.forEach(category => {
-//     const option = document.createElement('option');
-//     option.value = category;
-//     option.textContent = category;
-//     categoryInput.appendChild(option);
-//   });
+function populateCategoriesDropdown() {
+  categoryInput.innerHTML = '<option value="">Select a Category</option>';
 
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    categoryInput.appendChild(option);
+  });
+}
+
+populateCategoriesDropdown();
 
   function addCategory(categoryName) {
     if (!categories.includes(categoryName)) {
       categories.push(categoryName);
-    //   const option = document.createElement('option');
-    //   option.value = categoryName;
-    //   option.textContent = categoryName;
-    //   categoryInput.appendChild(option);
+      const option = document.createElement('option');
+      option.value = categoryName;
+      option.textContent = categoryName;
+      categoryInput.appendChild(option);
          categoryNameInput.value = '';
          updateCategoriesList();
     } else {
@@ -241,10 +246,10 @@ todoInput.addEventListener('keydown', function (event) {
     const categoryIndex = categories.indexOf(categoryName);
     if (categoryIndex !== -1) {
       categories.splice(categoryIndex, 1);
-    //   const categoryOption = categoryInput.querySelector(`option[value="${categoryName}"]`);
-    //   if (categoryOption) {
-    //     categoryOption.remove();
-    //   }
+      const categoryOption = categoryInput.querySelector(`option[value="${categoryName}"]`);
+      if (categoryOption) {
+        categoryOption.remove();
+      }
       updateCategoriesList();
     }
   }
@@ -298,7 +303,7 @@ todoInput.addEventListener('keydown', function (event) {
 
   clearCategoriesButton.addEventListener('click', function () {
     categories.length = 0;
-    // categoryInput.innerHTML = '<option value="">Select a Category</option>';
+    populateCategoriesDropdown();
     updateCategoriesList();
   });
-
+  
